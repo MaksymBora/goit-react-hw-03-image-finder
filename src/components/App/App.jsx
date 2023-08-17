@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 // import { toast } from 'react-toastify';
-import { InfinitySpin } from  'react-loader-spinner'
 import { fetchImages } from 'API';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { Gallery } from '../ImageGallery/ImageGallery';
 import { LoadMore } from '../LoadMore/LoadMore';
-import {Wrapper, Spinner} from './App.styled'
+import { Wrapper } from './App.styled'
+import {Loader} from '../Loader/Loader'
 
 export class App extends Component {
   state = {
@@ -76,7 +76,7 @@ export class App extends Component {
     return (
       <Wrapper>
         <Searchbar onSubmit={ this.handleSubmit } />
-        { loading && (<Spinner><InfinitySpin width='200' color="#3f51b5" /></Spinner>) }
+        { loading && (<Loader />) }
         {images.length > 0 && (<Gallery imgItems={ images } />)} 
         <LoadMore onClick={ this.handleLoadMore } />
       </Wrapper>

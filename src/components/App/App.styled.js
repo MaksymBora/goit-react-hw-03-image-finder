@@ -6,8 +6,3 @@ export const Wrapper = styled.div`
   grid-gap: 16px;
   padding-bottom: 24px;
 `;
-
-export const Spinner = styled.div`
-  margin-left: auto;
-  margin-right: auto;
-`;
