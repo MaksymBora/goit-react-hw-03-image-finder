@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import { toast } from 'react-toastify';
 import { InfinitySpin } from  'react-loader-spinner'
 import { fetchImages } from 'API';
 import { Searchbar } from '../Searchbar/Searchbar';
@@ -24,18 +25,35 @@ export class App extends Component {
   };
 
   componentDidUpdate = async (prevProps, prevState) => {
-    if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
+    const prevQuery = prevState.query;
+    const searchQuery = this.state.query;
+    const prevPage = prevState.page;
+    const nexPage = this.state.page;
 
-      try {
-        this.setState({ loading: true });
-        const img = await fetchImages(this.state.query, this.state.page);
-        return this.setState({
-          images:  img.data.hits, loading: false,
-        });
-        
-      } catch (error) {
-        console.log(error);
+    if (prevQuery !== searchQuery || prevPage !== nexPage) {
+      this.loadResult();
+    }
+  };
+
+  loadResult = async () => {
+    const searchQuery = this.state.query;
+    const nexPage = this.state.page;
+
+    try {
+      this.setState({ loading: true });
+      const img = await fetchImages(searchQuery, nexPage);
+      if (img.length) {
+        this.setState(prevState => ({
+          images: this.state.page > 1 ? [...prevState.images, ...img] : img,
+        }));
+        this.setState({ loading: false });
+      } else {
+        console.log('Sorry, there are no images matching your search query. Please try again.')
+        this.setState({ loading: false });
       }
+    } catch (error) {
+      console.log(error);
+      this.setState({ loading: false });
     }
   };
 
@@ -46,16 +64,21 @@ export class App extends Component {
   };
 
   handleLoadMore = () => {
-    this.setState(prevState => ({ page: prevState.page + 1 }));
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
   };
   
 
   render () {
+
+    const { loading, images } = this.state;
     return (
       <Wrapper>
-        <Searchbar onSubmit={ this.handleSubmit} />
-        {this.state.loading ? (<Spinner><InfinitySpin width='200'color="#3f51b5" /></Spinner> )  : (<Gallery imgItems={ this.state.images } />)}
-        <LoadMore onClick={this.handleLoadMore}/>
+        <Searchbar onSubmit={ this.handleSubmit } />
+        { loading && (<Spinner><InfinitySpin width='200' color="#3f51b5" /></Spinner>) }
+        {images.length > 0 && (<Gallery imgItems={ images } />)} 
+        <LoadMore onClick={ this.handleLoadMore } />
       </Wrapper>
     )
   }

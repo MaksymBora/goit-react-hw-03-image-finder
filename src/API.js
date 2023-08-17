@@ -11,11 +11,13 @@ export const fetchImages = async (query, page) => {
       params: {
         key: API_KEY,
         q: exstractedQuery,
+        image_type: 'photo',
+        orientation: 'horizontal',
         page: page,
         per_page: 12,
       },
     });
-    return response;
+    return response.data.hits;
   } catch (error) {
     console.log(error);
     throw error;
