@@ -1,11 +1,12 @@
-import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import { GalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import { ImageGallery } from './ImageGallery.styled';
 
-export const ImageGallery = ({ imgItems }) => {
+export const Gallery = ({ imgItems }) => {
   return (
     <div>
-      <ul>
-        <ImageGalleryItem items={imgItems} />
-      </ul>
+      <ImageGallery>
+        <GalleryItem items={imgItems} />
+      </ImageGallery>
     </div>
   );
 };

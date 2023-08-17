@@ -1,8 +1,9 @@
 import { fetchImages } from 'API';
 import React, { Component } from 'react';
-import { Searchbar } from './Searchbar/Searchbar';
-import { ImageGallery } from './ImageGallery/ImageGallery';
-import { LoadMore } from './LoadMore/LoadMore';
+import { Searchbar } from '../../Searchbar/Searchbar';
+import { Gallery } from '../ImageGallery';
+import { LoadMore } from '../../LoadMore/LoadMore';
+import {Wrapper} from './App.styled'
 
 export class App extends Component {
   state = {
@@ -44,11 +45,11 @@ export class App extends Component {
 
   render () {
     return (
-      <div>
+      <Wrapper>
         <Searchbar onSubmit={ this.handleSubmit} />
-        <ImageGallery imgItems={ this.state.images} />
+        <Gallery imgItems={ this.state.images} />
         <LoadMore onClick={this.handleLoadMore}/>
-      </div>
+      </Wrapper>
     )
   }
 };

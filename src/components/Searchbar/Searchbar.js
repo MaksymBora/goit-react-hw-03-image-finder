@@ -1,9 +1,9 @@
+import { CiSearch } from 'react-icons/ci';
 import {
   Header,
   SearchForm,
   SearchFormButton,
   SearchFormInput,
-  SearchFormButtonLabel,
 } from './Searchbar.styled';
 
 export const Searchbar = ({ onSubmit }) => {
@@ -11,9 +11,7 @@ export const Searchbar = ({ onSubmit }) => {
     <Header>
       <SearchForm onSubmit={onSubmit}>
         <SearchFormButton type="submit">
-          <SearchFormButtonLabel class="button-label">
-            Search
-          </SearchFormButtonLabel>
+          <CiSearch size={22} />
         </SearchFormButton>
         <SearchFormInput
           type="text"
