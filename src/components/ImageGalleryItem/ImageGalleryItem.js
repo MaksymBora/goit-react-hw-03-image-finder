@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import Modal from 'react-modal';
-import { ImageGalleryItemImg, ModalImage } from './ImageGalleryItem.styled';
+import { ImageGalleryItemImg } from './ImageGalleryItem.styled';
 
 const customStyles = {
   content: {
-    top: '50%',
+    top: '52%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
@@ -47,7 +47,7 @@ export class GalleryImage extends Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <ModalImage src={item.largeImageURL} alt={item.tags} />
+          <img src={item.largeImageURL} alt={item.tags} />
         </Modal>
       </div>
     );
