@@ -36,6 +36,7 @@ export class App extends Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
     this.changeQuery(evt.target.elements.query.value);
+    evt.target.reset();
   };
 
   handleLoadMore = () => {
