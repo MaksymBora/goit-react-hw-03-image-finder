@@ -25,7 +25,9 @@ export class App extends Component {
     if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
       try {
         const img = await fetchImages(this.state.query, this.state.page);
-        return this.setState({ images: img.data.hits });
+        return this.setState({
+          images: [...prevState.images, ...img.data.hits]
+        });
         
       } catch (error) {
         console.log(error);
