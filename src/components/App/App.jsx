@@ -1,8 +1,8 @@
 import { fetchImages } from 'API';
 import React, { Component } from 'react';
-import { Searchbar } from '../../Searchbar/Searchbar';
-import { Gallery } from '../ImageGallery';
-import { LoadMore } from '../../LoadMore/LoadMore';
+import { Searchbar } from '../Searchbar/Searchbar';
+import { Gallery } from '../ImageGallery/ImageGallery';
+import { LoadMore } from '../LoadMore/LoadMore';
 import {Wrapper} from './App.styled'
 
 export class App extends Component {
