@@ -1,4 +1,4 @@
-export const GalleryItems = ({ items }) => {
+export const ImageGalleryItem = ({ items }) => {
   return (
     <>
       {items.map(item => {

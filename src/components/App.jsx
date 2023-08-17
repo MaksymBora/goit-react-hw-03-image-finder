@@ -1,7 +1,7 @@
 import { fetchImages } from 'API';
 import React, { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
-import { Gallery } from './Gallery/Gallery';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 import { LoadMore } from './LoadMore/LoadMore';
 
 export class App extends Component {
@@ -46,7 +46,7 @@ export class App extends Component {
     return (
       <div>
         <Searchbar onSubmit={ this.handleSubmit} />
-        <Gallery imgItems={ this.state.images} />
+        <ImageGallery imgItems={ this.state.images} />
         <LoadMore onClick={this.handleLoadMore}/>
       </div>
     )
