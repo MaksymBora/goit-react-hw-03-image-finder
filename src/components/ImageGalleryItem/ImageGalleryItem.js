@@ -32,22 +32,23 @@ export class GalleryImage extends Component {
   closeModal = () => this.setState({ isModalOpen: false });
 
   render() {
-    const { item } = this.props;
+    const { webformatURL, tags, largeImageURL } = this.props.item;
+    const { isModalOpen } = this.state;
     return (
       <div>
         <ImageGalleryItemImg
-          src={item.webformatURL}
-          alt={item.tags}
+          src={webformatURL}
+          alt={tags}
           load="lazy"
           onClick={this.openModal}
         />
         <Modal
-          isOpen={this.state.isModalOpen}
+          isOpen={isModalOpen}
           onRequestClose={this.closeModal}
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <img src={item.largeImageURL} alt={item.tags} />
+          <img src={largeImageURL} alt={tags} />
         </Modal>
       </div>
     );
