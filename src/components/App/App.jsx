@@ -1,15 +1,17 @@
-import { fetchImages } from 'API';
 import React, { Component } from 'react';
+import { InfinitySpin } from  'react-loader-spinner'
+import { fetchImages } from 'API';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { Gallery } from '../ImageGallery/ImageGallery';
 import { LoadMore } from '../LoadMore/LoadMore';
-import {Wrapper} from './App.styled'
+import {Wrapper, Spinner} from './App.styled'
 
 export class App extends Component {
   state = {
     query: '',
     images: [],
-    page: 1
+    page: 1,
+    loading: false,
   };
 
   changeQuery = newQuery => {
@@ -23,10 +25,12 @@ export class App extends Component {
 
   componentDidUpdate = async (prevProps, prevState) => {
     if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
+
       try {
+        this.setState({ loading: true });
         const img = await fetchImages(this.state.query, this.state.page);
         return this.setState({
-          images: [...prevState.images, ...img.data.hits]
+          images:  img.data.hits, loading: false,
         });
         
       } catch (error) {
@@ -50,7 +54,7 @@ export class App extends Component {
     return (
       <Wrapper>
         <Searchbar onSubmit={ this.handleSubmit} />
-        <Gallery imgItems={ this.state.images} />
+        {this.state.loading ? (<Spinner><InfinitySpin width='200'color="#3f51b5" /></Spinner> )  : (<Gallery imgItems={ this.state.images } />)}
         <LoadMore onClick={this.handleLoadMore}/>
       </Wrapper>
     )
