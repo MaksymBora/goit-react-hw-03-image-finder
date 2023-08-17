@@ -1,9 +1,9 @@
-import { LoadMoreButton } from './LoadMore.style';
+import { PaginationaBtn } from './LoadMore.style';
 
-export const LoadMore = ({ onClick, children }) => {
+export const Pagination = ({ onClick, children }) => {
   return (
     <>
-      <LoadMoreButton onClick={onClick}>{children}</LoadMoreButton>
+      <PaginationaBtn onClick={onClick}>{children}</PaginationaBtn>
     </>
   );
 };

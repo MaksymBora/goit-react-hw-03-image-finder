@@ -21,5 +21,3 @@ export const success = query => {
     }
   );
 };
-
-// `I like ${extractedQuery}s too! `;
