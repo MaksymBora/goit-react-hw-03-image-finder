@@ -1,5 +1,8 @@
 import { fetchImages } from 'API';
 import React, { Component } from 'react';
+import { Searchbar } from './Searchbar/Searchbar';
+import { Gallery } from './Gallery/Gallery';
+import { LoadMore } from './LoadMore/LoadMore';
 
 export class App extends Component {
   state = {
@@ -21,7 +24,7 @@ export class App extends Component {
     if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
       try {
         const img = await fetchImages(this.state.query, this.state.page);
-        this.setState({ images: img });
+        return this.setState({ images: img.data.hits });
         
       } catch (error) {
         console.log(error);
@@ -39,21 +42,12 @@ export class App extends Component {
   };
   
 
-  render() {
+  render () {
     return (
       <div>
-        <div>
-          <form  onSubmit={this.handleSubmit}>
-            <input type="text" name="query"/>
-            <button type='submit'>Search</button>
-          </form>
-        </div>
-        
-        <div>Gallery</div>
-
-        <div>
-          <button onClick={this.handleLoadMore}>LoadMore</button>
-        </div>
+        <Searchbar onSubmit={ this.handleSubmit} />
+        <Gallery imgItems={ this.state.images} />
+        <LoadMore onClick={this.handleLoadMore}/>
       </div>
     )
   }
